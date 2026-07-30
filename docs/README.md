@@ -1,0 +1,1 @@
+# Kinetic demo store vtexio codebase
