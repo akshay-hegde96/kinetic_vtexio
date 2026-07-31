@@ -7,3 +7,12 @@
 
 /* Displays the option to enter an international phone */
 .phone-box { display: block; }
+
+#vtex-callcenter{
+    background-color: black;
+    color: white;   
+}
+body{
+    background-color: black;
+    color: white;
+}
