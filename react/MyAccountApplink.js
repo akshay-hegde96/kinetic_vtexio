@@ -4,7 +4,11 @@ import { intlShape, injectIntl } from 'react-intl'
 const MyAccountApplink = ({ render, intl }) => {
   return render([
     {
-      name:"Example Link",
+      name: "My Wishlist",
+      path: '/wishlist',
+    },
+    {
+      name: "Example Link",
       path: '/example',
     },
   ])
