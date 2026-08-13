@@ -226,9 +226,6 @@ const MyWishlist = () => {
       .catch((err) => console.warn('Could not sync with VTEX OrderForm', err))
 
     setAddedCartIds((prev) => ({ ...prev, [item.id]: true }))
-    setTimeout(() => {
-      setAddedCartIds((prev) => ({ ...prev, [item.id]: false }))
-    }, 2500)
   }
 
   const getCleanUrl = (item) => {
@@ -425,7 +422,7 @@ const MyWishlist = () => {
                         transition: 'background 0.2s ease'
                       }}
                     >
-                      {isAdded ? 'ADDED TO CART ✓' : 'ADD TO CART'}
+                      {isAdded ? 'IN CART ✓' : 'ADD TO CART'}
                     </button>
 
                     <a
