@@ -205,16 +205,19 @@ const MyWishlist = () => {
   }
 
   const [addedCartIds, setAddedCartIds] = useState({})
+  const [hoveredCartId, setHoveredCartId] = useState(null)
 
-  const handleAddToCart = (item) => {
+  const handleToggleCart = (item) => {
     const skuId = item.skuId || item.productId || '1'
+    const isCurrentlyInCart = !!addedCartIds[item.id]
+    const targetQty = isCurrentlyInCart ? 0 : 1
 
     fetch('/api/checkout/pub/orderForm/2/items', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({
-        orderItems: [{ id: skuId, quantity: 1, seller: '1' }]
+        orderItems: [{ id: skuId, quantity: targetQty, seller: '1' }]
       })
     })
       .then((res) => res.json())
@@ -225,7 +228,7 @@ const MyWishlist = () => {
       })
       .catch((err) => console.warn('Could not sync with VTEX OrderForm', err))
 
-    setAddedCartIds((prev) => ({ ...prev, [item.id]: true }))
+    setAddedCartIds((prev) => ({ ...prev, [item.id]: !isCurrentlyInCart }))
   }
 
   const getCleanUrl = (item) => {
@@ -345,6 +348,7 @@ const MyWishlist = () => {
           {items.map((item) => {
             const cleanUrl = getCleanUrl(item)
             const isAdded = !!addedCartIds[item.id]
+            const isHovered = hoveredCartId === item.id
 
             return (
               <div
@@ -405,11 +409,13 @@ const MyWishlist = () => {
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <button
-                      onClick={() => handleAddToCart(item)}
+                      onClick={() => handleToggleCart(item)}
+                      onMouseEnter={() => setHoveredCartId(item.id)}
+                      onMouseLeave={() => setHoveredCartId(null)}
                       style={{
                         width: '100%',
                         textAlign: 'center',
-                        background: isAdded ? '#16a34a' : '#0c0f0f',
+                        background: isAdded ? (isHovered ? '#dc2626' : '#16a34a') : '#0c0f0f',
                         color: '#ffffff',
                         padding: '10px',
                         borderRadius: '4px',
@@ -419,10 +425,10 @@ const MyWishlist = () => {
                         letterSpacing: '0.5px',
                         textTransform: 'uppercase',
                         cursor: 'pointer',
-                        transition: 'background 0.2s ease'
+                        transition: 'all 0.2s ease'
                       }}
                     >
-                      {isAdded ? 'IN CART ✓' : 'ADD TO CART'}
+                      {isAdded ? (isHovered ? 'REMOVE FROM CART ✕' : 'IN CART ✓') : 'ADD TO CART'}
                     </button>
 
                     <a
