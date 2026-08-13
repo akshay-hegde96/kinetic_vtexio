@@ -4,5 +4,8 @@
   },
   "my-account-page.my-app-page": {
     "component": "MyAccountAppPage"
+  },
+  "wishlist-account-button": {
+    "component": "WishlistAccountButton"
   }
 }
