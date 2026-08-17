@@ -7,6 +7,10 @@ const MyAccountApplink = ({ render, intl }) => {
       name:"Example Link",
       path: '/example',
     },
+    {
+      name:"My Order",
+      path: '/myorder',
+    },
   ])
 }
 

@@ -1,0 +1,40 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #fff;
+}
+
+.orderHeader {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.summary {
+  display: flex;
+  gap: 40px;
+  margin: 24px 0;
+}
+
+.summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  border: 1px solid #ddd;
+}
+
+.item img {
+  object-fit: contain;
+}
